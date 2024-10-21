@@ -1,0 +1,46 @@
+Description: Makefile configuration
+Author: Giulio Paci <giuliopaci@gmail.com>
+Forwarded: not-needed
+
+--- a/Makefile
++++ b/Makefile
+@@ -7,17 +7,17 @@
+ all : peg leg
+ 
+ peg : peg.o $(OBJS)
+-	$(CC) $(CFLAGS) -o $@-new peg.o $(OBJS)
++	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@-new peg.o $(OBJS)
+ 	mv $@-new $@
+ 
+ leg : leg.o $(OBJS)
+-	$(CC) $(CFLAGS) -o $@-new leg.o $(OBJS)
++	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@-new leg.o $(OBJS)
+ 	mv $@-new $@
+ 
+ ROOT	=
+ PREFIX	= /usr/local
+ BINDIR	= $(ROOT)$(PREFIX)/bin
+-MANDIR	= $(ROOT)$(PREFIX)/man/man1
++MANDIR	= $(ROOT)$(PREFIX)/share/man/man1
+ 
+ install : $(BINDIR) $(BINDIR)/peg $(BINDIR)/leg $(MANDIR) $(MANDIR)/peg.1
+ 
+@@ -25,8 +25,8 @@
+ 	mkdir -p $(BINDIR)
+ 
+ $(BINDIR)/% : %
++	mkdir -p $(BINDIR)
+ 	cp -p $< $@
+-	strip $@
+ 
+ $(MANDIR) :
+ 	mkdir -p $(MANDIR)
+@@ -40,7 +40,7 @@
+ 	rm -f $(MANDIR)/peg.1
+ 
+ %.o : src/%.c
+-	$(CC) $(CFLAGS) -c -o $@ $<
++	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+ 
+ peg.o : src/peg.c src/peg.peg-c
+ 
