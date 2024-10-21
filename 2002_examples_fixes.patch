@@ -1,0 +1,105 @@
+Description: fixes examples files
+ Makes examples files suitable for distribution
+Author: Giulio Paci <giuliopaci@gmail.com>
+Forwarded: not-needed
+--- a/examples/Makefile
++++ b/examples/Makefile
+@@ -8,7 +8,7 @@
+ all : $(EXAMPLES)
+ 
+ test : .FORCE
+-	../peg -o test.peg.c test.peg
++	peg -o test.peg.c test.peg
+ 	$(CC) $(CFLAGS) -o test test.c
+ 	echo 'ab.ac.ad.ae.afg.afh.afg.afh.afi.afj.' | ./$@ | $(TEE) $@.out
+ 	$(DIFF) $@.ref $@.out
+@@ -16,7 +16,7 @@
+ 	@echo
+ 
+ rule : .FORCE
+-	../peg -o rule.peg.c rule.peg
++	peg -o rule.peg.c rule.peg
+ 	$(CC) $(CFLAGS) -o rule rule.c
+ 	echo 'abcbcdabcbcdabcbcdabcbcd' | ./$@ | $(TEE) $@.out
+ 	$(DIFF) $@.ref $@.out
+@@ -24,7 +24,7 @@
+ 	@echo
+ 
+ accept : .FORCE
+-	../peg -o accept.peg.c accept.peg
++	peg -o accept.peg.c accept.peg
+ 	$(CC) $(CFLAGS) -o accept accept.c
+ 	echo 'abcbcdabcbcdabcbcdabcbcd' | ./$@ | $(TEE) $@.out
+ 	$(DIFF) $@.ref $@.out
+@@ -32,7 +32,7 @@
+ 	@echo
+ 
+ wc : .FORCE
+-	../leg -o wc.leg.c wc.leg
++	leg -o wc.leg.c wc.leg
+ 	$(CC) $(CFLAGS) -o wc wc.leg.c
+ 	cat wc.leg | ./$@ | $(TEE) $@.out
+ 	$(DIFF) $@.ref $@.out
+@@ -40,7 +40,7 @@
+ 	@echo
+ 
+ dc : .FORCE
+-	../peg -o dc.peg.c dc.peg
++	peg -o dc.peg.c dc.peg
+ 	$(CC) $(CFLAGS) -o dc dc.c
+ 	echo '  2  *3 *(3+ 4) ' | ./dc | $(TEE) $@.out
+ 	$(DIFF) $@.ref $@.out
+@@ -48,7 +48,7 @@
+ 	@echo
+ 
+ dcv : .FORCE
+-	../peg -o dcv.peg.c dcv.peg
++	peg -o dcv.peg.c dcv.peg
+ 	$(CC) $(CFLAGS) -o dcv dcv.c
+ 	echo 'a = 6;  b = 7;  a * b' | ./dcv | $(TEE) $@.out
+ 	$(DIFF) $@.ref $@.out
+@@ -56,7 +56,7 @@
+ 	@echo
+ 
+ calc : .FORCE
+-	../leg -o calc.leg.c calc.leg
++	leg -o calc.leg.c calc.leg
+ 	$(CC) $(CFLAGS) -o calc calc.leg.c
+ 	echo 'a = 6;  b = 7;  a * b' | ./calc | $(TEE) $@.out
+ 	$(DIFF) $@.ref $@.out
+@@ -64,7 +64,7 @@
+ 	@echo
+ 
+ basic : .FORCE
+-	../leg -o basic.leg.c basic.leg
++	leg -o basic.leg.c basic.leg
+ 	$(CC) $(CFLAGS) -o basic basic.leg.c
+ 	( echo 'load "test"'; echo "run" ) | ./basic | $(TEE) $@.out
+ 	$(DIFF) $@.ref $@.out
+@@ -72,7 +72,7 @@
+ 	@echo
+ 
+ localpeg : .FORCE
+-	../peg -o test.peg.c test.peg
++	peg -o test.peg.c test.peg
+ 	$(CC) $(CFLAGS) -o localpeg localpeg.c
+ 	echo 'ab.ac.ad.ae.afg.afh.afg.afh.afi.afj.' | ./$@ | $(TEE) $@.out
+ 	$(DIFF) $@.ref $@.out
+@@ -80,7 +80,7 @@
+ 	@echo
+ 
+ localleg : .FORCE
+-	../leg -o localleg.leg.c localleg.leg
++	leg -o localleg.leg.c localleg.leg
+ 	$(CC) $(CFLAGS) -o localleg localleg.leg.c
+ 	./$@ < localleg.leg | $(TEE) $@.out
+ 	$(DIFF) $@.ref $@.out
+@@ -88,7 +88,7 @@
+ 	@echo
+ 
+ erract : .FORCE
+-	../leg -o erract.leg.c erract.leg
++	leg -o erract.leg.c erract.leg
+ 	$(CC) $(CFLAGS) -o erract erract.leg.c
+ 	echo '6*9' | ./$@ | $(TEE) $@.out
+ 	$(DIFF) $@.ref $@.out
