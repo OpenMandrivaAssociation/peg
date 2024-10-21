@@ -26,6 +26,8 @@ single activity.
 %autosetup -p1
 
 %build
+export CC=gcc
+export CXX=g++
 %make_build
 
 PATH="..:$PATH" \
