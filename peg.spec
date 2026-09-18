@@ -9,6 +9,7 @@ Source0:	https://www.piumarta.com/software/peg/%{name}-%{version}.tar.gz
 Patch0:		2001_makefile_configuration.patch
 Patch1:		2002_examples_fixes.patch
 
+BuildRequires: make
 Provides:	leg = %{version}-%{release}
 Provides:	leg%{_isa} = %{version}-%{release}
 
